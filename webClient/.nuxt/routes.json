@@ -1,12 +1,5 @@
 [
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "E:\\\\Development\\\\ASP.NET Core\\\\TrickingLibrary\\\\webClient\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_415f4c83"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "E:\\\\Development\\\\ASP.NET Core\\\\TrickingLibrary\\\\webClient\\\\pages\\\\index.vue",

@@ -16,5 +16,3 @@ jobs:
         run: ls
       - name: Check dotnet
         run: dotnet build
-      - name: Check npm
-        run: ls .\TrickingLibrary.Api\ -R

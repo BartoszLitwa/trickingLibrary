@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +30,15 @@ namespace TrickingLibrary.Api.Controllers
                 await video.CopyToAsync(fileStream);
             }
 
-            return Ok();
+            return Ok(fileName);
+        }
+
+        [HttpGet("{video}")]
+        public IActionResult GetVideo(string video)
+        {
+            //var mime = video.Split('.').Last();
+            var savePath = Path.Combine(_env.WebRootPath, video);
+            return new FileStreamResult(new FileStream(savePath, FileMode.Open, FileAccess.Read), "video/*");
         }
     }
 }

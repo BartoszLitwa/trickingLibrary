@@ -3,3 +3,4 @@ bin/
 obj/
 webClient/obj/
 node_modules/
+TrickingLibrary.Api/wwwroot/

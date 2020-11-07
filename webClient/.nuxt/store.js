@@ -20,6 +20,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('..\\store\\tricks.js'), 'tricks.js')
+  resolveStoreModules(require('..\\store\\videos.js'), 'videos.js')
 
   // If the environment supports hot reloading...
 
@@ -28,6 +29,7 @@ let store = {};
     module.hot.accept([
       '..\\store\\index.js',
       '..\\store\\tricks.js',
+      '..\\store\\videos.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()

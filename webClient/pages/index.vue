@@ -1,66 +1,140 @@
 <template>
   <div>
-    <v-file-input accept="video/*" @change="handleFile">
-
-    </v-file-input>
-
     <div v-if="tricks">
-      <p v-for="trick in tricks" :key="trick.name">
+      <div v-for="trick in tricks" :key="trick">
+        <div>
         {{trick.name}}
-      </p>
+          <video width="400" controls :src="`http://localhost:5000/api/videos/${trick.video}`"></video>
+        </div>
+      </div>
     </div>
 
-    <div>
-      <v-text-field label="Tricking Name" v-model="trickName"></v-text-field>
-      <v-btn @click="saveTrick">Save Trick</v-btn>
-
-    </div>
-
-    {{message}}
-    <v-btn @click="reset">Reset Message</v-btn>
-    <v-btn @click="resetTricks">Reset Tricks</v-btn>
+    <v-stepper v-model="step">
+      <v-stepper-header>
+        <v-stepper-step
+          :complete="step > 1"
+          step="1"
+        >
+          Upload Video
+        </v-stepper-step>
+  
+        <v-divider></v-divider>
+  
+        <v-stepper-step
+          :complete="step > 2"
+          step="2"
+        >
+          Trick Information
+        </v-stepper-step>
+  
+        <v-divider></v-divider>
+  
+        <v-stepper-step step="3">
+          Confirmation
+        </v-stepper-step>
+      </v-stepper-header>
+  
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-card
+            class="mb-12"
+            color="grey lighten-1"
+            height="200px"
+          >
+              <v-file-input accept="video/*" @change="handleFile"/>
+          </v-card>
+  
+          <v-btn
+            color="primary"
+            @click="step = 2"
+          >
+            Continue
+          </v-btn>
+        </v-stepper-content>
+  
+        <v-stepper-content step="2">
+          <v-card
+            class="mb-12"
+            color="grey lighten-1"
+            height="200px"
+          >
+          <div>
+            <v-text-field label="Tricking Name" v-model="trickName"></v-text-field>
+            <v-btn @click="saveTrick">Save Trick</v-btn>
+          </div>
+          </v-card>
+  
+          <v-btn
+            color="primary"
+            @click="step = 3"
+          >
+            Continue
+          </v-btn>
+        </v-stepper-content>
+  
+        <v-stepper-content step="3">
+          <v-card
+            class="mb-12"
+            color="grey lighten-1"
+            height="200px"
+          >
+          <div>Success</div>
+          </v-card>
+  
+          <v-btn
+            color="primary"
+            @click="step = 1"
+          >
+            Continue
+          </v-btn>
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
   </div>
 </template>
 
 <script>
-import Axios from 'axios'
 import {mapState, mapActions, mapMutations} from 'vuex'
 
 export default {
   components: {
   },
   data: () => ({
-    trickName: ""
+    trickName: "",
+    step: 1,
   }),
   computed: {
-      ...mapState({
-        message: state => state.message
-      }),
-      ...mapState('tricks', {
-        tricks: state => state.tricks
-      })
+      ...mapState('tricks', ['tricks']),
+      ...mapState('videos', ['uploadPromise']),
     },
     methods: {
-    ...mapMutations([
-      'reset'
-    ]),
-    ...mapMutations('tricks', {
-      resetTricks: 'reset'
+    ...mapMutations('videos', {
+      resetVideos: 'reset'
     }),
     ...mapActions('tricks', ['createTrick']),
-    async saveTrick() {
-      await this.createTrick({trick: {name: this.trickName}});
-      this.trickName = ""
-    },
+    ...mapActions('videos', ['startVideoUpload']),
+
     async handleFile(file) {
-      if(!file) return;
+        if (!file) return;
 
-      const form = new FormData();
-      form.append("video", file);
+        const form = new FormData();
+        form.append("video", file)
+        this.startVideoUpload({form});
+        this.step++;
+      },
 
-      const result = await Axios.post("http://localhost:5000/api/videos", form);
-      console.log("Result: ", result);
-    }
-  },
+    async saveTrick() {
+      if(!this.uploadPromise) {
+        console.log("Upload Promise is null");
+        return;
+      }
+
+      const video = await this.uploadPromise;
+      await this.createTrick({trick: {name: this.trickName, video}});
+      this.trickName = "";
+      this.step++;
+      this.resetVideos();
+    },
+  }
 }
 </script>

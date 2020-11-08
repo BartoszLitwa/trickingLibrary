@@ -1,1 +1,8 @@
-{}
+{
+  "VideoUpload": {
+    "description": "Auto imported from components/video-upload.vue"
+  },
+  "LazyVideoUpload": {
+    "description": "Auto imported from components/video-upload.vue"
+  }
+}

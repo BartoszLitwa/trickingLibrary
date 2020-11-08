@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrickingLibrary.Api", "TrickingLibrary.Api\TrickingLibrary.Api.csproj", "{36BC640A-FEE7-4C35-8505-C37A20045D2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrickingLibrary.Models", "TrickingLibrary.Models\TrickingLibrary.Models.csproj", "{B3014317-A7D1-4E30-B97F-6F8D9E56FCF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrickingLibrary.Data", "TrickingLibrary.Data\TrickingLibrary.Data.csproj", "{742A0DFA-988B-44A9-85BB-83C62840474E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{36BC640A-FEE7-4C35-8505-C37A20045D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36BC640A-FEE7-4C35-8505-C37A20045D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36BC640A-FEE7-4C35-8505-C37A20045D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3014317-A7D1-4E30-B97F-6F8D9E56FCF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3014317-A7D1-4E30-B97F-6F8D9E56FCF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3014317-A7D1-4E30-B97F-6F8D9E56FCF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3014317-A7D1-4E30-B97F-6F8D9E56FCF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{742A0DFA-988B-44A9-85BB-83C62840474E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{742A0DFA-988B-44A9-85BB-83C62840474E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{742A0DFA-988B-44A9-85BB-83C62840474E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{742A0DFA-988B-44A9-85BB-83C62840474E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

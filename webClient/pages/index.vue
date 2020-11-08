@@ -1,10 +1,17 @@
 <template>
   <div>
+
     <div v-if="tricks">
-      <div v-for="trick in tricks" :key="trick.name">
+      <div v-for="t in tricks" :key="t.Id">
+        {{t.id}} - {{t.name}}
+      </div>
+    </div>
+
+    <div v-if="submissions">
+      <div v-for="s in submissions" :key="s.Id">
+        {{s.id}} - {{s.description}} - {{s.trickId}}
         <div>
-        {{trick.name}}
-          <video width="400" controls :src="`http://localhost:5000/api/videos/${trick.video}`"></video>
+          <video width="400" controls :src="`http://localhost:5000/api/videos/${s.video}`"></video>
         </div>
       </div>
     </div>
@@ -13,11 +20,11 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-
-export default {
-  computed: {
-    ...mapState('tricks', ['tricks']),
-  },
-}
+  import {mapState} from 'vuex';
+  export default {
+    computed: {
+      ...mapState('tricks', ['tricks']),
+      ...mapState('submissions', ['submissions']),
+    }
+  }
 </script>

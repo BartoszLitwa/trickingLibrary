@@ -3,16 +3,7 @@
 
     <div v-if="tricks">
       <div v-for="t in tricks" :key="t.Id">
-        {{t.id}} - {{t.name}}
-      </div>
-    </div>
-
-    <div v-if="submissions">
-      <div v-for="s in submissions" :key="s.Id">
-        {{s.id}} - {{s.description}} - {{s.trickId}}
-        <div>
-          <video width="400" controls :src="`http://localhost:5000/api/videos/${s.video}`"></video>
-        </div>
+        <v-btn :to="`/tricks/${t.id}`"> {{t.name}} </v-btn>
       </div>
     </div>
 
@@ -24,7 +15,9 @@
   export default {
     computed: {
       ...mapState('tricks', ['tricks']),
-      ...mapState('submissions', ['submissions']),
+    },
+    async fetch() {
+      await this.$store.dispatch("tricks/fetchTricks", null, {root: true});
     }
   }
 </script>

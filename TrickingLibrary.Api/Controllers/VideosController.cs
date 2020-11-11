@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TrickingLibrary.Api.Controllers
 {
@@ -14,7 +14,7 @@ namespace TrickingLibrary.Api.Controllers
 
         public VideosController(IWebHostEnvironment env)
         {
-            this._env = env;
+            _env = env;
         }
 
         [HttpPost]

@@ -20,16 +20,24 @@ namespace TrickingLibrary.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Trick> All() => _ctx.Tricks.ToList();
+        public IEnumerable<Trick> All()
+        {
+            return _ctx.Tricks.ToList();
+        }
 
         [HttpGet("{id}")]
-        public Trick Get(string id) => _ctx.Tricks.FirstOrDefault(x =>
-        x.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+        public Trick Get(string id)
+        {
+            return _ctx.Tricks.FirstOrDefault(x =>
+                x.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+        }
 
         [HttpGet("{trickId}/submissions")]
-        public IEnumerable<Submission> ListSubmissionsForTrick(string trickId) =>
-            _ctx.Submissions.Where(x =>
-            x.TrickId.Equals(trickId, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        public IEnumerable<Submission> ListSubmissionsForTrick(string trickId)
+        {
+            return _ctx.Submissions.Where(x =>
+                x.TrickId.Equals(trickId, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
 
         [HttpPost]
         public async Task<Trick> Create([FromBody] Trick trick)
@@ -44,10 +52,7 @@ namespace TrickingLibrary.Api.Controllers
         [HttpPut]
         public async Task<Trick> Update([FromBody] Trick trick)
         {
-            if (string.IsNullOrEmpty(trick.Id))
-            {
-                return null;
-            }
+            if (string.IsNullOrEmpty(trick.Id)) return null;
 
             _ctx.Add(trick);
             await _ctx.SaveChangesAsync();

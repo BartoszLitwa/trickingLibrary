@@ -17,5 +17,8 @@ export const actions = {
     async fetchSubmissionsForTrick({ commit }, { id }) {
         const submissions = await this.$axios.$get(`/api/tricks/${id}/submissions`);
         commit("setSubmissions", { submissions })
+    },
+    createSubmission({ state, commit, dispatch }, { form }) {
+        return this.$axios.$post("/api/submissions", form);
     }
 }

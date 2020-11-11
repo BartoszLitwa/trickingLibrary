@@ -19,24 +19,18 @@ namespace TrickingLibrary.Api
 
             services.AddCors(options => options.AddPolicy(AllCors, build =>
                 build.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
-                ));
+            ));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseCors(AllCors);
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
         }
     }
 }

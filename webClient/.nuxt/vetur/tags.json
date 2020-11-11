@@ -1,8 +1,20 @@
 {
-  "VideoUpload": {
-    "description": "Auto imported from components/video-upload.vue"
+  "ContentCreationDialog": {
+    "description": "Auto imported from components/content-creation/content-creation-dialog.vue"
   },
-  "LazyVideoUpload": {
-    "description": "Auto imported from components/video-upload.vue"
+  "LazyContentCreationDialog": {
+    "description": "Auto imported from components/content-creation/content-creation-dialog.vue"
+  },
+  "SubmissionSteps": {
+    "description": "Auto imported from components/content-creation/submission-steps.vue"
+  },
+  "LazySubmissionSteps": {
+    "description": "Auto imported from components/content-creation/submission-steps.vue"
+  },
+  "TrickSteps": {
+    "description": "Auto imported from components/content-creation/trick-steps.vue"
+  },
+  "LazyTrickSteps": {
+    "description": "Auto imported from components/content-creation/trick-steps.vue"
   }
 }

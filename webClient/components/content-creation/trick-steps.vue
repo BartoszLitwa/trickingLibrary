@@ -12,7 +12,15 @@
 
       <v-stepper-content step="1">
         <div>
-          <v-text-field v-model="form.name" label="Tricking Name"></v-text-field>
+          <v-text-field v-model="form.name" label="Name"></v-text-field>
+          <v-text-field v-model="form.description" label="Description"></v-text-field>
+          <v-select v-model="form.difficulty" :items="difficultyItems" label="Difficulty"></v-select>
+          <v-select v-model="form.prerequisites" :items="trickItems" chips
+                    deletable-chips label="Prerequisites" multiple small-chips></v-select>
+          <v-select v-model="form.progressions" :items="trickItems" chips
+                    deletable-chips label="Progressions" multiple small-chips></v-select>
+          <v-select v-model="form.categories" :items="categoryItems" chips
+                    deletable-chips label="Categories" multiple small-chips></v-select>
           <v-btn @click="step++">Next</v-btn>
         </div>
       </v-stepper-content>
@@ -27,13 +35,23 @@
 </template>
 
 <script>
-import {mapActions, mapMutations, mapState} from 'vuex';
+import {mapActions, mapGetters, mapMutations, mapState} from 'vuex';
 
 const initState = () => ({
   step: 1,
   form: {
     name: "",
-  }
+    description: "",
+    difficulty: "",
+    prerequisites: [],
+    progressions: [],
+    categories: [],
+  },
+  testData: [
+    {text: "foo", value: 1},
+    {text: "bar", value: 2},
+    {text: "zoo", value: 3},
+  ]
 })
 
 export default {
@@ -48,6 +66,7 @@ export default {
   },
   computed: {
     ...mapState('video-upload', ['active']),
+    ...mapGetters('tricks', ['trickItems', 'categoryItems', 'difficultyItems']),
   },
   methods: {
     ...mapMutations('video-upload', ['reset']),

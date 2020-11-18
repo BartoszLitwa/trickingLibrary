@@ -1,9 +1,21 @@
 {
+  "CategoryForm": {
+    "description": "Auto imported from components/content-creation/category-form.vue"
+  },
+  "LazyCategoryForm": {
+    "description": "Auto imported from components/content-creation/category-form.vue"
+  },
   "ContentCreationDialog": {
     "description": "Auto imported from components/content-creation/content-creation-dialog.vue"
   },
   "LazyContentCreationDialog": {
     "description": "Auto imported from components/content-creation/content-creation-dialog.vue"
+  },
+  "DifficultyForm": {
+    "description": "Auto imported from components/content-creation/difficulty-form.vue"
+  },
+  "LazyDifficultyForm": {
+    "description": "Auto imported from components/content-creation/difficulty-form.vue"
   },
   "SubmissionSteps": {
     "description": "Auto imported from components/content-creation/submission-steps.vue"

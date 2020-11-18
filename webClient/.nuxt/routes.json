@@ -3,12 +3,14 @@
     "name": "tricks-trick",
     "path": "/tricks/:trick?",
     "component": "E:\\\\Development\\\\ASP.NET Core\\\\TrickingLibrary\\\\webClient\\\\pages\\\\tricks\\\\_trick.vue",
-    "chunkName": "pages/tricks/_trick"
+    "chunkName": "pages/tricks/_trick",
+    "_name": "_29370e8a"
   },
   {
     "name": "index",
     "path": "/",
     "component": "E:\\\\Development\\\\ASP.NET Core\\\\TrickingLibrary\\\\webClient\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_605e16bb"
   }
 ]

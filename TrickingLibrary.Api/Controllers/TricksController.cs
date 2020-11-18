@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TrickingLibrary.Api.Form;
+using TrickingLibrary.Api.ViewModels;
 using TrickingLibrary.Data;
 using TrickingLibrary.Models;
 
@@ -20,43 +22,51 @@ namespace TrickingLibrary.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Trick> All()
-        {
-            return _ctx.Tricks.ToList();
-        }
+        public IEnumerable<object> All() => _ctx.Tricks.Select(TrickViewModels.Default).ToList();
 
         [HttpGet("{id}")]
-        public Trick Get(string id)
+        public object Get(string id)
         {
-            return _ctx.Tricks.FirstOrDefault(x =>
-                x.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+            return _ctx.Tricks
+                .Where(x => x.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase))
+                .Select(TrickViewModels.Default)
+                .FirstOrDefault();
         }
 
         [HttpGet("{trickId}/submissions")]
         public IEnumerable<Submission> ListSubmissionsForTrick(string trickId)
         {
-            return _ctx.Submissions.Where(x =>
+            return _ctx.Submissions
+                .Where(x =>
                 x.TrickId.Equals(trickId, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
         [HttpPost]
-        public async Task<Trick> Create([FromBody] Trick trick)
+        public async Task<object> Create([FromBody] TrickForm trickForm)
         {
-            // Normalizes to current region
-            trick.Id = trick.Name.Replace(" ", "-").ToLowerInvariant();
+            var trick = new Trick {
+                // Normalizes to current region
+                Id = trickForm.Name.Replace(" ", "-").ToLowerInvariant(),
+                Name = trickForm.Name,
+                Description = trickForm.Description,
+                Difficulty = trickForm.Difficulty,
+                TrickCategories = trickForm.Categories.Select(x => new TrickCategory {
+                    CategoryId = x,
+                }).ToList(),
+            };
             _ctx.Add(trick);
             await _ctx.SaveChangesAsync();
-            return trick;
+            return TrickViewModels.Default.Compile().Invoke(trick);
         }
 
         [HttpPut]
-        public async Task<Trick> Update([FromBody] Trick trick)
+        public async Task<object> Update([FromBody] Trick trick)
         {
             if (string.IsNullOrEmpty(trick.Id)) return null;
 
             _ctx.Add(trick);
             await _ctx.SaveChangesAsync();
-            return trick;
+            return TrickViewModels.Default.Compile().Invoke(trick);
         }
 
         [HttpDelete("{id}")]
